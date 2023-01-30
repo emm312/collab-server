@@ -1,5 +1,7 @@
 [requires]
 boost/1.81.0
+bzip2/1.0.8
+zlib/1.2.13
 
 [generators]
 cmake

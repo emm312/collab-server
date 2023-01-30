@@ -1,3 +1,4 @@
 /build
 GOALS.md
-lockfile.json
+compile_commands.json
+/.cache

@@ -8,12 +8,21 @@ if sys.argv.__contains__("--release"):
 else:
     CMAKE_BUILD_TYPE = "Debug"
 
+# Wait not export the compile commands in the cmake file then just soft link/move them after running the script
+# You know how cmake can expor t compile_command.json
+# yeah ik
+
+
+# o yea i forgor
+
 subprocess.run(["mkdir", "build"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-if os.path.exists("build/conan.lock") == False:
-    os.system("cd build && conan install ..")
+os.system("cd build && conan install .. --build missing")
 
-os.system("cd build && cmake .. -DCMAKE_BUILD_TYPE={CMAKE_BUILD_TYPE}")
+# I added compile commands export into the cmake file itself
+# I can actually import asio in main.cpp
+os.system("cd build && cmake .. -DCMAKE_BUILD_TYPE={CMAKE_BUILD_TYPE} -DCMAKE_EXPORT_COMPILE_COMMANDS=1")
+os.system("ln -sf build/compile_commands.json .")
 
 os.system(f"cd build && cmake --build .")
 
