@@ -1,22 +1,17 @@
+#include "boost/asio/detail/chrono.hpp"
 #include "boost/asio/execution_context.hpp"
+#include "boost/asio/io_context.hpp"
+#include "boost/asio/steady_timer.hpp"
 #include <iostream>
 #include <string>
-#include <boost/asio.hpp> // This works
-
-// KZIX
-// I am tryna make sure boost installs locally on my system rn
-// Interesting I am not getting autocomplete from boost
-// It might be because of restricted mode
-// Still no autocomplete, damn working on this project collaboratively justifies itself
-// I have autocomplete rn
-// We aren't getting boost information tho
-// Do you get diagnostics from boost?
-
-// EMM
-// same, i think its because its not detecting the libs or smth
-// i dont even get autocomplete for std::
-// wait am i on restricted mode
-// lmao fr
+#include <boost/asio.hpp>
+#include <boost/coroutine2/coroutine.hpp>
+// Time to figure out how boost works
 int main() {
-    std::cout << "hi world\n";
+    boost::asio::io_context io;
+    boost::asio::steady_timer t(io, boost::asio::chrono::seconds(5));
+    t.wait();
+
+    std::cout << "Hello World" << std::endl;
+    return 0;
 }
